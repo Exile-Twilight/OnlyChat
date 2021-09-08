@@ -1,0 +1,121 @@
+<html>
+<head>
+<title>MsgAdpter.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6a8759;}
+.s3 { color: #808080;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+MsgAdpter.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.example.onlychat.adapter</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">android.util.Log</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.view.LayoutInflater</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.view.View</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.view.ViewGroup</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.widget.ImageView</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.widget.LinearLayout</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.widget.TextView</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">androidx.annotation.NonNull</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">androidx.recyclerview.widget.RecyclerView</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">com.example.onlychat.ChatActivity</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.example.onlychat.Msg</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.example.onlychat.R</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.example.onlychat.util.Util</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">java.util.ArrayList</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.util.List</span><span class="s0">;</span>
+
+<span class="s0">public class </span><span class="s1">MsgAdpter </span><span class="s0">extends </span><span class="s1">RecyclerView.Adapter&lt;MsgAdpter.MsgHolder&gt; {</span>
+    <span class="s0">public </span><span class="s1">MsgAdpter(List&lt;Msg&gt; msgList) {</span>
+        <span class="s0">this</span><span class="s1">.msgList = msgList</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">private final </span><span class="s1">List&lt;Msg&gt; msgList </span><span class="s0">;</span>
+    <span class="s1">@NonNull</span>
+    <span class="s1">@Override</span>
+    <span class="s0">public </span><span class="s1">MsgHolder onCreateViewHolder(@NonNull ViewGroup parent</span><span class="s0">, int </span><span class="s1">viewType) {</span>
+        <span class="s1">View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.msg_item_recycler</span><span class="s0">,</span><span class="s1">parent</span><span class="s0">,false</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">MsgHolder msgHolder = </span><span class="s0">new </span><span class="s1">MsgHolder(view)</span><span class="s0">;</span>
+        <span class="s0">return </span><span class="s1">msgHolder</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">public void </span><span class="s1">onBindViewHolder(@NonNull MsgHolder holder</span><span class="s0">, int </span><span class="s1">position) {</span>
+        <span class="s1">Msg msg = msgList.get(position)</span><span class="s0">;</span>
+        <span class="s0">if </span><span class="s1">(msg.getContentstype().equalsIgnoreCase(</span><span class="s2">&quot;text&quot;</span><span class="s1">))</span>
+        <span class="s1">{</span>
+
+            <span class="s0">if </span><span class="s1">(msg.getSender_id().equals(ChatActivity.getUsername()))</span>
+            <span class="s1">{</span>
+                <span class="s1">holder.linearLayoutRight.setVisibility(View.VISIBLE)</span><span class="s0">;</span>
+                <span class="s1">holder.linearLayoutLeft.setVisibility(View.GONE)</span><span class="s0">;</span>
+                <span class="s1">holder.imageViewRight.setVisibility(View.GONE)</span><span class="s0">;</span>
+                <span class="s1">holder.contextRight.setText(msg.getContents())</span><span class="s0">;</span>
+            <span class="s1">}</span><span class="s0">else</span>
+            <span class="s1">{</span>
+                <span class="s1">holder.linearLayoutLeft.setVisibility(View.VISIBLE)</span><span class="s0">;</span>
+                <span class="s1">holder.linearLayoutRight.setVisibility(View.GONE)</span><span class="s0">;</span>
+                <span class="s1">holder.imageViewLeft.setVisibility(View.GONE)</span><span class="s0">;</span>
+                <span class="s1">holder.contextLeft.setText(msg.getContents())</span><span class="s0">;</span>
+
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+<span class="s3">//        if (msg.getContentstype().equalsIgnoreCase(&quot;image&quot;))</span>
+<span class="s3">//        {</span>
+<span class="s3">//            if (msg.getSender_id().equals(ChatActivity.getUsername()))</span>
+<span class="s3">//            {</span>
+<span class="s3">//                holder.linearLayoutRight.setVisibility(View.VISIBLE);</span>
+<span class="s3">//                holder.linearLayoutLeft.setVisibility(View.GONE);</span>
+<span class="s3">//                holder.contextRight.setText(&quot;\n---来自&quot;+msg.getSender());</span>
+<span class="s3">//                holder.imageViewRight.setImageBitmap(Util.base64ToBitmap(msg.getContents()));</span>
+<span class="s3">//            }else</span>
+<span class="s3">//            {</span>
+<span class="s3">//                holder.linearLayoutRight.setVisibility(View.GONE);</span>
+<span class="s3">//                holder.linearLayoutLeft.setVisibility(View.VISIBLE);</span>
+<span class="s3">//                holder.contextLeft.setText(&quot;\n---来自&quot;+msg.getSender());</span>
+<span class="s3">//                holder.imageViewLeft.setImageBitmap(Util.base64ToBitmap(msg.getContents()));</span>
+<span class="s3">//</span>
+<span class="s3">//            }</span>
+<span class="s3">//        }</span>
+
+    <span class="s1">}</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">public int </span><span class="s1">getItemCount() {</span>
+        <span class="s0">return </span><span class="s1">msgList.size()</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public class </span><span class="s1">MsgHolder </span><span class="s0">extends </span><span class="s1">RecyclerView.ViewHolder</span>
+    <span class="s1">{</span>
+        <span class="s1">LinearLayout linearLayoutLeft</span><span class="s0">;</span>
+        <span class="s1">LinearLayout linearLayoutRight</span><span class="s0">;</span>
+        <span class="s1">TextView contextLeft</span><span class="s0">;</span>
+        <span class="s1">ImageView imageViewLeft</span><span class="s0">;</span>
+        <span class="s1">TextView contextRight</span><span class="s0">;</span>
+        <span class="s1">ImageView imageViewRight</span><span class="s0">;</span>
+        <span class="s0">public </span><span class="s1">MsgHolder(@NonNull View itemView) {</span>
+            <span class="s0">super</span><span class="s1">(itemView)</span><span class="s0">;</span>
+            <span class="s1">linearLayoutLeft = itemView.findViewById(R.id.left_layout)</span><span class="s0">;</span>
+            <span class="s1">linearLayoutRight = itemView.findViewById(R.id.right_layout)</span><span class="s0">;</span>
+            <span class="s1">contextLeft = itemView.findViewById(R.id.msg_left)</span><span class="s0">;</span>
+            <span class="s1">contextRight = itemView.findViewById(R.id.msg_right)</span><span class="s0">;</span>
+            <span class="s1">imageViewLeft = itemView.findViewById(R.id.image_left)</span><span class="s0">;</span>
+            <span class="s1">imageViewRight = itemView.findViewById(R.id.image_right)</span><span class="s0">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+    
+<span class="s1">}</span>
+</pre>
+</body>
+</html>

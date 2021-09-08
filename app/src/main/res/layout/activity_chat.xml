@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ChatActivity">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/chat_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@android:drawable/ic_menu_gallery"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="680dp" />
+
+        <EditText
+            android:id="@+id/msg_edittext"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:layout_weight="1" />
+        <Button
+            android:id="@+id/msg_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="发送"
+            tools:layout_editor_absoluteX="227dp"
+            tools:layout_editor_absoluteY="215dp" />
+    </LinearLayout>
+</LinearLayout>

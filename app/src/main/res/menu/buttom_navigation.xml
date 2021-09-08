@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/view_bottom_navigation_online"
+        android:icon="@drawable/ic_bottom_navigation_online"
+        android:title="在线"></item>
+    <item
+        android:id="@+id/view_bottom_navigation_contacts"
+        android:icon="@drawable/ic_bottom_navigation_contacts"
+        android:title="联系人"></item>
+    <item
+        android:id="@+id/view_bottom_navigation_group"
+        android:icon="@drawable/ic_bottom_navigation_group"
+        android:title="群聊"></item>
+</menu>
